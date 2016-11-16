@@ -16,7 +16,7 @@ class Apriori(object):
             Ck = self.apriori_gen(Lkm1)
             for datalist in self.data:
                 for item in Ck:
-                    if set(item) <= set(dataList):      # 如果datalist包含itemn，C[item]++
+                    if set(item) <= set(datalist):      # 如果datalist包含itemn，C[item]++
                         if tuple(item) in c_dic:
                             c_dic[tuple(item)] +=1
                         else:
@@ -25,7 +25,7 @@ class Apriori(object):
             Lk = []
             for item in c_dic:
                 if c_dic[item] >= self.min_sup_val:
-                    Lk.append([item])
+                    Lk.append(list(item))
 
             Lkm1 = Lk
             L += Lk
@@ -90,5 +90,5 @@ if __name__ == '__main__':
     dataList = [line.strip().split('\t') for line in open(filePath)]
     data = [data[2:8] for data in dataList[1:]]
     t = Apriori(data, 2)
-    t.apriori()
-    print(t)
+    L = t.apriori()
+    print(L)
